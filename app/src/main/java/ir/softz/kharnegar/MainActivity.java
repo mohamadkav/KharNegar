@@ -1,15 +1,12 @@
 package ir.softz.kharnegar;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 
 public class MainActivity extends Activity {
@@ -17,15 +14,17 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
         final GifMovieView gif1 = (GifMovieView) findViewById(R.id.gif1);
         gif1.setMovieResource(R.drawable.gif_heart);
-//        float scale = 0.5f;
-//        gif1.setPivotX(50);
-//        gif1.setPivotY(50);
-//        gif1.setScaleX(gif1.getScaleX() + scale);
-//        gif1.setScaleY(gif1.getScaleY() + scale);
+        gif1.setScaleY(size.y/360);
+        gif1.setScaleX(size.x/480);
     }
 
     @Override
